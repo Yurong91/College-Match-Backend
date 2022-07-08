@@ -25,9 +25,25 @@ const userSchema = new Schema({
         required: true
     },
     myList: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'School'
+        }
 
     ]
+}, {
+    timestamps: true,
+    toJSON: {
+        transform: function(doc, ret) {
+            delete ret.password
+            return ret
+        }
+    }
+})
 
+userSchema.pre('save', async function(next) {
+    this.password = await bcrypt.hash(this.password, saltRounds)
+    return next()
 })
 
 module.exports = mongoose.model('User', userSchema)

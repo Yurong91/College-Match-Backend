@@ -11,10 +11,16 @@ require('./config/database')
 app.use(express.json())
 app.use(cors())
 
+//Check if we have a token and create req.user
+app.use(require('./config/checkToken'))
 
 //=====ROUTES=====
 //Users
 app.use('/api/v1/users', require('./routes/api/users'))
+
+//Protect API routes from unauthorized users
+const ensureLoggedIn = require('./config/ensureLoggedIn')
+
 //Schools
 app.use('/api/v1/schools', require('./routes/api/schools'))
 //MyList

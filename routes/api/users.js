@@ -2,6 +2,7 @@ const { Router } = require('express')
 const express = require('express')
 const router = express.Router()
 const usersCtrl = require('../../controllers/api/users')
+const ensureLoggedIn = require('../../config/ensureLoggedIn')
 
 //POST /api/v1/users
 router.post('/', usersCtrl.create)
@@ -10,7 +11,7 @@ router.post('/login', usersCtrl.login)
 
 //Below routes needs authorized users
 //GET /api/v1/users/:id
-router.get('/:id', ensuredLoggedIn, usersCtrl.show)
+router.get('/:id', ensureLoggedIn, usersCtrl.show)
 //GET /api/v1/users/:id/myList
 router.get('/:id/myList', ensureLoggedIn, usersCtrl.getMyList)
 //PUT /api/v1/users/:id
