@@ -14,10 +14,6 @@ const schoolSchema = new Schema ({
         type: String,
         required: true
     },
-    student_size: {
-        type: String,
-        required: true
-    },
     graduation_rate: {
         type: String,
         required: true
@@ -26,6 +22,7 @@ const schoolSchema = new Schema ({
         type: String,
         required: true
     },
+    student_size: String,
     attenddence_year: String,
     median_family_income: String,
     school_url: String
@@ -33,4 +30,4 @@ const schoolSchema = new Schema ({
     timestamps: true
 })
 
-module.exports = mongoose.model('Movie', schoolSchema)
+module.exports = mongoose.model('School', schoolSchema)
